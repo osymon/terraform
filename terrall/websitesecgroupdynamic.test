@@ -1,0 +1,34 @@
+
+provider "aws" {
+	region="eu-central-1"
+}
+
+resource "aws_security_group" "webserver" {
+	name= "webserversecgroupdynamic"
+	description="terraformsecgroup"
+
+
+dynamic "ingress"  {
+	for_each = ["80", "443", "1541", "8080", "3306"]
+	content {
+	  from_port=ingress.value
+	  to_port=ingress.value
+	  protocol="tcp"
+	  cidr_bloks= ["0.0.0.0/0"]
+}
+}
+ingress {
+          from_port=22
+	  to_port=22
+	  protocol="tcp"
+	  cidr_bloks= ["31.57.22.16/32"]
+egress {
+	from_port=0
+	to_port=0
+	protocol="-1" #all protocols
+	cidr_bloks= ["0.0.0.0/0"] #all ip
+}
+tags = {
+	name= "WebServerSecGroup"
+	owner= "Oleksandr Symonenko"
+}
