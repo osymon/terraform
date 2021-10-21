@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "eu-central-1"
+  region = "ap-northeast-2"
 }
 
 data "aws_ami" "latest_ubuntu" {
