@@ -10,3 +10,6 @@ output "latest_ubuntu_ami-id" {
 output "latest_ubuntu_ami-name" {
   value = data.aws_ami.latest_ubuntu.name
 }
+output "security_group-id" {
+  value = aws_security_group.gogs.id
+}
